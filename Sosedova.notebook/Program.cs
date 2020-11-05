@@ -101,9 +101,9 @@ namespace Sosedova.notebook
 
              }
 
-            using (StreamWriter write_employee = new StreamWriter(@"../../Employees_2.txt"))//writing to a file "Employees"
+            using (StreamWriter write_employee = new StreamWriter(@"../../Employees.txt"))//writing to a file "Employees"
             {
-                using (StreamWriter write_manager = new StreamWriter(@"../../Managers_2.txt"))//writing to a file "Managers"
+                using (StreamWriter write_manager = new StreamWriter(@"../../Managers.txt"))//writing to a file "Managers"
                 {
 
                     for (int i = 0; i <= managers.Count - 1; i++)
@@ -121,10 +121,10 @@ namespace Sosedova.notebook
             Console.ReadKey();
         }
 
-        public static void Add_employ(List<Employee> employees)
+        public static void Add_employ(List<Employee> employees)//Add an employee record
         {
             string[] words = Console.ReadLine().Split(' ');
-            if (int.Parse(words[2]) > 1940 && (int.Parse(words[2]) < 2020))
+            if (int.Parse(words[2]) > 1940 && (int.Parse(words[2]) < 2020))//Condition for the correct year of birth 
             {
                 employees.Add(new Employee()
                 {
@@ -140,10 +140,10 @@ namespace Sosedova.notebook
                 Console.WriteLine("Year entered incorrectly");
             }
         }
-        public static void Add_manag(List<Manager> managers)
+        public static void Add_manag(List<Manager> managers)//Add an manager record
         {
             string[] words = Console.ReadLine().Split(' ');
-            if (int.Parse(words[2]) > 1940 && (int.Parse(words[2]) < 2020))
+            if (int.Parse(words[2]) > 1940 && (int.Parse(words[2]) < 2020))//Condition for the correct year of birth 
             {
                 managers.Add(new Manager()
                 {
@@ -159,43 +159,43 @@ namespace Sosedova.notebook
                Console.WriteLine("Year entered incorrectly");
             }
         }
-        public static void Delete_employ(List<Employee> employees)
+        public static void Delete_employ(List<Employee> employees)//Delete an employee record
         {
             string LastName = Console.ReadLine();
-            employees.Remove(employees.Find(employee => employee.LastName == LastName));
+            employees.Remove(employees.Find(employee => employee.LastName == LastName));//Deleting using a linq query
         }
         public static void Delete_manag(List<Manager> managers, List<Employee> employees)
         {
             string LastName = Console.ReadLine();
 
-            if(employees.FindAll(employee => employee.manager == LastName).Count == 0)
+            if(employees.FindAll(employee => employee.manager == LastName).Count == 0)//If the ьanager has no employees, then delete it
             {
-                managers.Remove(managers.Find(manager => manager.LastName == LastName));
+                managers.Remove(managers.Find(manager => manager.LastName == LastName));//Deleting using a linq query
             }
             else
             {
-                foreach (var item in managers)
+                foreach (var item in managers)//output all existing managers
                 {
                     Console.Write(item.LastName + " ");
                 }
-                Console.WriteLine("Найден Менеджер! Vvedite novogo Menegera");
-                string newManager = Console.ReadLine();
+                Console.WriteLine("Manager found! Enter another Manager");
+                string newManager = Console.ReadLine();//You need to enter an existing one
 
-                if(managers.Find(manager => manager.LastName == newManager) == null)
+                if(managers.Find(manager => manager.LastName == newManager) == null)//Checks if it exists
                 {
-                    Console.WriteLine("Введённого менеджера не существует!");
+                    Console.WriteLine("The Manager doesn't exist!");
                     return ;
                 }
 
-                foreach(var employee_item in employees.FindAll(employee => employee.manager == newManager))
+                foreach(var employee_item in employees.FindAll(employee => employee.manager == newManager))//to determine the employee's new Manager
                 {
                     employee_item.manager = newManager;
                 }
 
-                managers.Remove(managers.Find(manager => manager.LastName == LastName));
+                managers.Remove(managers.Find(manager => manager.LastName == LastName));////Deleting using a linq query
             }
         }
-        public static Employee Search_employ_Ln(List<Employee> employees)
+        public static Employee Search_employ_Ln(List<Employee> employees)//Search by employee's last name
         {
             string LastName = Console.ReadLine();
             Employee employee = employees.Find(e_Ln => e_Ln.LastName == LastName);
@@ -206,7 +206,7 @@ namespace Sosedova.notebook
             }
             return employee;
         }
-        public static Employee Search_employ_Fn(List<Employee> employees)
+        public static Employee Search_employ_Fn(List<Employee> employees)//Search by employee's first name
         {
             string FirstName = Console.ReadLine();
             Employee employee = employees.Find(e_Fn => e_Fn.FirstName == FirstName);
@@ -217,7 +217,7 @@ namespace Sosedova.notebook
             }
             return employee;
         }
-        public static Employee Search_employ_Pn(List<Employee> employees)
+        public static Employee Search_employ_Pn(List<Employee> employees)// Search by employee's phone number
         {
             string phoneNumber = Console.ReadLine();
             Employee employee = employees.Find(e_Pn => e_Pn.phoneNumber == phoneNumber);
@@ -229,7 +229,7 @@ namespace Sosedova.notebook
             return employee;
         }
 
-        public static Manager Search_manag_Ln(List<Manager> managers)
+        public static Manager Search_manag_Ln(List<Manager> managers)// Search by manager's last name
         {
             string LastName = Console.ReadLine();
             Manager manager = managers.Find(m_Ln => m_Ln.LastName == LastName);
@@ -240,7 +240,7 @@ namespace Sosedova.notebook
             }
             return manager;
         }
-        public static Manager Search_manag_Fn(List<Manager> managers)
+        public static Manager Search_manag_Fn(List<Manager> managers)// Search by manager's first name
         {
             string FirstName = Console.ReadLine();
             Manager manager = managers.Find(m_Fn => m_Fn.FirstName == FirstName);
@@ -251,7 +251,7 @@ namespace Sosedova.notebook
             }
             return manager;
         }
-        public static Manager Search_manag_Pn(List<Manager> managers)
+        public static Manager Search_manag_Pn(List<Manager> managers)//Search by manager's phone number
         {
             string phoneNumber = Console.ReadLine();
             Manager manager = managers.Find(m_Pn => m_Pn.phoneNumber == phoneNumber);
