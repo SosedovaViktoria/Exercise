@@ -38,7 +38,7 @@ namespace Sosedova.notebook
                 if (this.yearOfBirth > e.yearOfBirth)
                     return 1;
                 else if (this.yearOfBirth < e.yearOfBirth)
-                    return -1;
+                    return -1; 
                 else return 0;
 
             }
